@@ -1,3 +1,4 @@
+const { uniq } = require("lodash/fp");
 const { d6 } = require("./dice.js");
 
 const ABILITIES = [
@@ -27,10 +28,31 @@ const values = () =>
 
 const modifier = (value) => Math.floor((value - 10) / 2);
 
+const generate = (baseline, priorities, values_) => (
+  (values_ = values()),
+  [...priorities, ...ABILITIES].reduce(
+    (acc, ability, index) => ({
+      ...acc,
+      [ability]: values_[index] + baseline[ability] || 0,
+    }),
+    {}
+  )
+);
+
+const modifiers = (abilities) =>
+  ABILITIES.reduce(
+    (acc, ability) => ({
+      ...acc,
+      [ability]: modifier(abilities[ability]),
+    }),
+    {}
+  );
+
 module.exports = {
   ABILITIES,
   STATIC_VALUES,
   value,
   values,
   modifier,
+  generate,
 };

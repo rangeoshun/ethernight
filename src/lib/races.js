@@ -1,38 +1,20 @@
 const RACES = {
-  hillDwarf: {
+  dwarf: {
     abilities: {
       constitution: 2,
       wisdom: 1,
     },
   },
-  mountainDwarf: {
-    abilities: {
-      strength: 2,
-      constitution: 2,
-    },
-  },
-  highElf: {
+  elf: {
     abilities: {
       dexterity: 2,
       intelligence: 1,
     },
   },
-  woodElf: {
-    abilities: {
-      dexterity: 2,
-      widsom: 1,
-    },
-  },
-  lightfootHalfling: {
+  halfling: {
     abilities: {
       dexterity: 2,
       charisma: 1,
-    },
-  },
-  stoutHalfling: {
-    abilities: {
-      constitution: 1,
-      dexterity: 2,
     },
   },
   human: {
@@ -44,6 +26,33 @@ const RACES = {
       wisdom: 1,
       charisma: 1,
     },
+  },
+  dragonborn: {
+    abilities: {
+      strength: 2,
+      charisma: 1,
+    },
+  },
+  gnome: {
+    abilities: {
+      intelligence: 2,
+    },
+  },
+  halfElf: {
+    abilities: {
+      charisma: 2,
+      custom: [1, 1],
+    },
+  },
+  halfOrk: {
+    abilities: {
+      strength: 2,
+      constitution: 1,
+    },
+  },
+  tiefling: {
+    intelligence: 1,
+    charisma: 2,
   },
 };
 

@@ -1,6 +1,7 @@
-const dice = (sides) => () => Math.ceil(Math.random() * sides);
+const die = (sides) => () => Math.ceil(Math.random() * sides);
 
 module.exports = {
-  d6: dice(6),
-  d20: dice(20),
+  die,
+  d6: die(6),
+  d20: die(20),
 };

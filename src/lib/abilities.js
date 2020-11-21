@@ -28,12 +28,12 @@ const values = () =>
 
 const modifier = (value) => Math.floor((value - 10) / 2);
 
-const generate = (baseline, priorities, values_) => (
+const generate = (baseline = {}, priorities = [], values_) => (
   (values_ = values()),
-  [...priorities, ...ABILITIES].reduce(
+  uniq([...priorities, ...ABILITIES]).reduce(
     (acc, ability, index) => ({
       ...acc,
-      [ability]: values_[index] + baseline[ability] || 0,
+      [ability]: values_[index] + (baseline[ability] || 0),
     }),
     {}
   )
@@ -54,5 +54,6 @@ module.exports = {
   value,
   values,
   modifier,
+  modifiers,
   generate,
 };

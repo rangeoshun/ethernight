@@ -81,10 +81,10 @@ const staticHitDie = (hitDie) => hitDie / 2 + 1;
 const unarmoredDefense = (modifiers, components) =>
   components.reduce((acc, ability) => acc + modifiers[ability]);
 
-const hitPoints = (hitDie, modifier, previous = 0, static = false) => (
-  (static =
-    (static && staticHitDie(hitDie)) || (previous && die(hitDie)) || hitDie),
-  previous + static + modifier
+const hitPoints = (hitDie, modifier, previous = 0, useDice = false, value_) => (
+  (value_ =
+    (useDice && staticHitDie(hitDie)) || (previous && die(hitDie)) || hitDie),
+  previous + value_ + modifier
 );
 
 const abilityPriority = (klass) => uniq([...klass.primary, ...klass.saving]);

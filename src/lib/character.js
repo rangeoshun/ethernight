@@ -1,6 +1,7 @@
 const a = require("./abilities");
 const c = require("./classes");
 const r = require("./races");
+const d = require("./dice");
 
 const generate = (race, klass, abilities_, modifiers_) => (
   (race = r.RACES[race]),
@@ -15,6 +16,9 @@ const generate = (race, klass, abilities_, modifiers_) => (
   }
 );
 
+const check = (ability, character) => d.d20() + character.modifiers[ability];
+
 module.exports = {
   generate,
+  check,
 };

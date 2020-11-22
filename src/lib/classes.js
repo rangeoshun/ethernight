@@ -94,8 +94,6 @@ const CLASSES = {
 
 const staticHitDie = (hitDie) => hitDie / 2 + 1;
 
-const passFn = (_, value) => value;
-
 const calculateFeature = (char, [valueFn, modifierFn]) => (
   console.log(char, valueFn, modifierFn),
   ([basic, ...modifiers]) => [
@@ -104,16 +102,23 @@ const calculateFeature = (char, [valueFn, modifierFn]) => (
   ]
 );
 
-const calculateValue = (modifiers, components) =>
-  components.reduce((acc, ability) => acc + modifiers[ability]);
+const calculateValue = (components = [0], modifiers = {}) =>
+  components.reduce((acc, ability) => acc + (modifiers[ability] || 0));
 
-const calculate = (char, chain, basic_, features_, klass_) => (
-  (klass_ = CLASSES[char.class]),
-  ([basic_, ...features_] = klass_[chain]),
-  flow(
-    ...features_.map((feat) => calculateFeature(char, klass_[feat])),
-    (components) => calculateValue(char.modifiers, components)
-  )(basic_)
+const calculate = (
+  char = {},
+  chain,
+  basic_,
+  features_,
+  klass_,
+  resolver_,
+  calc_
+) => (
+  (klass_ = CLASSES[char.class] || {}),
+  ([basic_, ...features_] = klass_[chain] || []),
+  (resolver_ = (feat) => calculateFeature(char, klass_[feat])),
+  (calc_ = (components) => calculateValue(components, char.modifiers)),
+  flow(...features_.map(resolver_), calc_)(basic_)
 );
 
 const hitPoints = (hitDie, modifier, previous = 0, useDice = false, value_) => (

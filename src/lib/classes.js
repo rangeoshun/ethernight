@@ -107,10 +107,11 @@ const calculateFeature = (char, [valueFn, modifierFn]) => (
 const calculateValue = (modifiers, components) =>
   components.reduce((acc, ability) => acc + modifiers[ability]);
 
-const calculate = (char, chain, basic_, features_) => (
-  ([basic_, ...features_] = char.class[chain]),
+const calculate = (char, chain, basic_, features_, klass_) => (
+  (klass_ = CLASSES[char.class]),
+  ([basic_, ...features_] = klass_[chain]),
   flow(
-    ...features_.map((feat) => calculateFeature(char, char.class[feat])),
+    ...features_.map((feat) => calculateFeature(char, klass_[feat])),
     (components) => calculateValue(char.modifiers, components)
   )(basic_)
 );

@@ -92,7 +92,7 @@ const CLASSES = {
   },
 };
 
-const staticHitDie = (hitDie) => hitDie / 2 + 1;
+const staticHitDie = (hitDie = 0) => hitDie / 2 + 1;
 
 const calculateFeature = (char, [valueFn, modifierFn]) => (
   console.log(char, valueFn, modifierFn),
@@ -121,9 +121,15 @@ const calculate = (
   flow(...features_.map(resolver_), calc_)(basic_)
 );
 
-const hitPoints = (hitDie, modifier, previous = 0, useDice = false, value_) => (
+const hitPoints = (
+  hitDie = 0,
+  modifier = 0,
+  previous = 0,
+  useDie = false,
+  value_
+) => (
   (value_ =
-    (useDice && staticHitDie(hitDie)) || (previous && roll(hitDie)) || hitDie),
+    (!useDie && staticHitDie(hitDie)) || (previous && roll(hitDie)) || hitDie),
   previous + value_ + modifier
 );
 

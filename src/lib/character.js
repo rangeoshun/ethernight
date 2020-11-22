@@ -11,8 +11,9 @@ const generate = (race, klass, abilities_, modifiers_) => (
   {
     ...abilities_,
     modifiers: modifiers_,
-    armorClass: c.unarmoredDefense(modifiers_, klass.unarmoredDefense),
+    armorClass: c.calculateValue(modifiers_, klass.unarmoredDefense),
     hitPoints: c.hitPoints(klass.hitDie, abilities_.constitution),
+    class: klass,
   }
 );
 

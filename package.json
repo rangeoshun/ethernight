@@ -4,7 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch"
+  },
+  "jest": {
+    "verbose": true
   },
   "devDependencies": {
     "jest": "^26.6.3"

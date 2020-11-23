@@ -1,4 +1,4 @@
-const a = require("../src/lib/abilities");
+const a = require("../abilities");
 
 describe(a.generate, () => {
   const abilities = a.generate();

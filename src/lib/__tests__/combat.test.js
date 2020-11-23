@@ -1,4 +1,4 @@
-const c = require("../src/lib/combat");
+const c = require("../combat");
 
 describe(c.attack, () => {
   [

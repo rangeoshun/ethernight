@@ -105,8 +105,8 @@ const calculateFeature = (char, [valueFn, modifierFn]) => (
 const calculateValue = (components = [0], modifiers = {}) =>
   components.reduce((acc, ability) => acc + (modifiers[ability] || 0));
 
-const calculate = (
-  char = {},
+const calculateChain = (
+  character = {},
   chain,
   basic_,
   features_,
@@ -114,10 +114,10 @@ const calculate = (
   resolver_,
   calc_
 ) => (
-  (klass_ = CLASSES[char.class] || {}),
+  (klass_ = CLASSES[character.class] || {}),
   ([basic_, ...features_] = klass_[chain] || []),
-  (resolver_ = (feat) => calculateFeature(char, klass_[feat])),
-  (calc_ = (components) => calculateValue(components, char.modifiers)),
+  (resolver_ = (feat) => calculateFeature(character, klass_[feat])),
+  (calc_ = (components) => calculateValue(components, character.modifiers)),
   flow(...features_.map(resolver_), calc_)(basic_)
 );
 
@@ -139,6 +139,6 @@ module.exports = {
   abilityPriority,
   CLASSES,
   hitPoints,
-  calculate,
+  calculateChain,
   calculateValue,
 };

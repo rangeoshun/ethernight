@@ -20,8 +20,8 @@ const attack = (modifier, defenderArmorClass, roll_) => (
 
 const fight = (characters = [], ordered_ = false, ended_ = false) => (
   ordered_ || fight(initiative(characters), true),
-  ordered_ &&
-    ((ended_ && characters) ||
+  (ordered_ && ended_ && characters) ||
+    (!ended_ &&
       ((characters = characters.reduce(
         ([first, ...rest], next_, others_, attack_, damage_) => (
           ([next_, ...others_] = rest),

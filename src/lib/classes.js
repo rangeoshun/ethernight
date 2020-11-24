@@ -94,13 +94,10 @@ const CLASSES = {
 
 const staticHitDie = (hitDie = 0) => hitDie / 2 + 1;
 
-const calculateFeature = (char, [valueFn, modifierFn]) => (
-  console.log(char, valueFn, modifierFn),
-  ([basic, ...modifiers]) => [
-    valueFn(char, basic),
-    ...modifierFn(char, modifiers),
-  ]
-);
+const calculateFeature = (char, [valueFn, modifierFn]) => ([
+  basic,
+  ...modifiers
+]) => [valueFn(char, basic), ...modifierFn(char, modifiers)];
 
 const calculateValue = (components = [0], modifiers = {}) =>
   components.reduce((acc, ability) => acc + (modifiers[ability] || 0));
